@@ -1,6 +1,6 @@
 import colors from "colors";
 import { deployBlobert, deployDescriptorCustom, deployDescriptorRegular, deploySeeder } from "./libs/contract.js";
-import {merkle} from "starknet";
+import { merkle } from "starknet";
 
 const main = async () => {
   console.log(`   ____          _         `.red);
@@ -9,11 +9,11 @@ const main = async () => {
   console.log(`  |____/|___|  _|_|___|_  |`.red);
   console.log(`            |_|       |___|`.red);
 
-  let seeder = 0x592403d219ba2077760667c8244850a22a7e04f8f97af89c9d1c8df4678b79cn;
-  let descriptor_regular = 0x7c82f2f8199551b5eb828de9d0a485c1dfbe8f4d05502a7e39d1379da398d7fn;
-  let descriptor_custom = 0x63ab8702d967c25ad40c0c9bf76df50b9473ca57b282810463fe0ab6166751bn;
+  let seeder = 0x88831d7574861084cf68eb017a9465c416082481cb3457af0e7eb8960b53ccn;
+  let descriptor_regular = 0x1c45419d101b0a0e5ac333d5c7823d8c2fd7d2fa66982c5814194a13d049eacn;
+  let descriptor_custom = 0x19524960405f69c76cf80f5d9cbfae56fd2c0920b7060f0c59f4d46a7f596fbn;
 
-  await deployBlobert(seeder,descriptor_regular, descriptor_custom);
+  await deployBlobert(seeder, descriptor_regular, descriptor_custom);
 }
 
 

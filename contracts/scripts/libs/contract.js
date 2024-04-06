@@ -6,7 +6,7 @@ import { json } from "starknet";
 import { getNetwork, getAccount } from "./network.js";
 import { initial_assigned_recipients } from "../assigned_custom.js";
 // import merkle_data  from "../test_merkle_data.json" assert { type: "json" };
-import merkle_data  from "../merkle_data.json" assert { type: "json" };
+import merkle_data from "../merkle_data.json" assert { type: "json" };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -72,14 +72,14 @@ const declare = async (filepath, contract_name) => {
 
 
 
-export const deployBlobert = async (seeder,descriptor_regular, descriptor_custom ) => {
+export const deployBlobert = async (seeder, descriptor_regular, descriptor_custom) => {
 
   ///////////////////////////////////////////
   ////////    BLOBERT         ///////////////
   ///////////////////////////////////////////
 
-    // Load account
-    const account = getAccount();
+  // Load account
+  const account = getAccount();
 
 
   // declare contract
@@ -89,7 +89,7 @@ export const deployBlobert = async (seeder,descriptor_regular, descriptor_custom
 
   let token_name = "Blobert";
   let token_symbol = "BLOB";
-  let owner = 0x0140809B710276e2e07c06278DD8f7D4a2528acE2764Fce32200852CB3893e5Cn 
+  let owner = 0x0140809B710276e2e07c06278DD8f7D4a2528acE2764Fce32200852CB3893e5Cn
   let fee_token_address = 0x0124aeb495b947201f5fac96fd1138e326ad86195b98df6dec9009158a533b49n
   // let fee_token_address = 0x4ef0e2993abf44178d3a40f2818828ed1c09cde9009677b7a3323570b4c0f2en
   let fee_token_amount = 100 * (10 ** 18)
@@ -106,23 +106,23 @@ export const deployBlobert = async (seeder,descriptor_regular, descriptor_custom
   ]
 
   // add merkle roots
-  constructorCalldata 
+  constructorCalldata
     = addArrayToCalldata(constructorCalldata, whitelist_merkle_roots())
 
   // mint start time
-  let wltime = Math.round(new Date().getTime() / 1000) + (50 * 60)
-  let regtime = wltime + (60 * 60 * 24)
+  let wltime = Math.round(new Date().getTime() / 1000) + 10000
+  let regtime = wltime + 10
   constructorCalldata
-    .push( regtime )
+    .push(regtime)
   constructorCalldata
-    .push( wltime) 
+    .push(wltime)
 
   // initial custom nft recipients
   let initial_assigned_recips = initial_assigned_recipients();
-  constructorCalldata 
-  = addArrayToCalldata(constructorCalldata, initial_assigned_recips)
+  constructorCalldata
+    = addArrayToCalldata(constructorCalldata, initial_assigned_recips)
 
-  
+
   // Deploy contract
   console.log(`\nDeploying ${name} ... \n\n`.green);
   let contract = await account.deployContract({
@@ -155,8 +155,8 @@ export const deploySeeder = async () => {
   let name = "Seeder"
   const class_hash
     = (await declare(getPath(name), name)).class_hash;
-  
-    // Deploy contract
+
+  // Deploy contract
   console.log(`\nDeploying ${name} ... \n\n`.green);
   let contract = await account.deployContract({
     classHash: class_hash,
@@ -191,8 +191,8 @@ export const deployDescriptorRegular = async () => {
   let descriptor_regular = "DescriptorRegular"
   const descriptor_regular_class_hash
     = (await declare(getPath(descriptor_regular), descriptor_regular)).class_hash;
-  
-    // Deploy contract
+
+  // Deploy contract
   console.log(`\nDeploying ${descriptor_regular} ... \n\n`.green);
   let contract = await account.deployContract({
     classHash: descriptor_regular_class_hash,
@@ -213,7 +213,7 @@ export const deployDescriptorRegular = async () => {
 }
 
 export const deployDescriptorCustom = async () => {
-  
+
   // Load account
   const account = getAccount();
 
@@ -225,8 +225,8 @@ export const deployDescriptorCustom = async () => {
   let descriptor_custom = "DescriptorCustom"
   const descriptor_custom_class_hash
     = (await declare(getPath(descriptor_custom), descriptor_custom)).class_hash;
-  
-    // Deploy contract
+
+  // Deploy contract
   console.log(`\nDeploying ${descriptor_custom} ... \n\n`.green);
   let contract = await account.deployContract({
     classHash: descriptor_custom_class_hash
@@ -234,7 +234,7 @@ export const deployDescriptorCustom = async () => {
 
 
   // Wait for transaction
- let network = getNetwork(process.env.STARKNET_NETWORK);
+  let network = getNetwork(process.env.STARKNET_NETWORK);
   console.log(
     "Tx hash: ".green,
     `${network.explorer_url}/tx/${contract.transaction_hash})`,
@@ -247,7 +247,7 @@ export const deployDescriptorCustom = async () => {
 
 
 
-function whitelist_merkle_roots(){
+function whitelist_merkle_roots() {
   return [
     BigInt(merkle_data["1"]["root"]),
     BigInt(merkle_data["2"]["root"]),
@@ -260,7 +260,7 @@ function whitelist_merkle_roots(){
 const addArrayToCalldata = (calldata, arr) => {
 
   calldata.push(arr.length)
-  for (let j =0 ; j < arr.length; j++) {
+  for (let j = 0; j < arr.length; j++) {
     calldata.push(arr[j]);
   }
 

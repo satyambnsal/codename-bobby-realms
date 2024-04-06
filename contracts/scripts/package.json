@@ -12,7 +12,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "dotenv": "^16.3.1",
-    "starknet": "github:starknet-io/starknet.js"
+    "starknet": "6.6.6"
   },
   "devDependencies": {
     "prettier": "3.1.1"

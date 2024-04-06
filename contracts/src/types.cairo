@@ -13,8 +13,6 @@ mod descriptor {
 
 mod seeder {
     use starknet::{StorePacking};
-
-
     #[derive(Copy, Drop, Serde, Hash, PartialEq)]
     struct Seed {
         background: u8,
